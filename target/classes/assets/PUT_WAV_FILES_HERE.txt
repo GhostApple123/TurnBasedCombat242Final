@@ -1,0 +1,2 @@
+Add background.wav, attack.wav, block.wav, special.wav, victory.wav, and gameover.wav here.
+The game will still run if these files are missing.

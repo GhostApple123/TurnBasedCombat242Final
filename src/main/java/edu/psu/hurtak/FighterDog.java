@@ -1,0 +1,31 @@
+package edu.psu.hurtak;
+
+/**
+ * Project: TurnBasedCombat242Final
+ * Purpose Details: Turn-based cat combat game where Alpha, Explorer, or Yoda fight dog enemies and a three-headed dog boss.
+ * Course: IST 242
+ * Author: Alexander Matthew Hurtak
+ * Date Developed: 06/23/2026
+ * Last Date Changed: 06/25/2026
+ * Rev: 1
+ */
+
+public class FighterDog extends Enemy {
+
+    public FighterDog(int level) {
+        super("Fighter Dog", 18 + level * 3, 6 + level, 2 + level, 5 + level, 3 + level);
+    }
+
+    @Override
+    public String special(Character defender) {
+        if (specialCooldown > 0) {
+            return name + " tries to use a special, but it is recharging.";
+        }
+
+        int damage = attack * 2;
+        defender.takeDamage(damage);
+        specialCooldown = 2;
+
+        return name + " uses Power Bite for " + damage + " damage!";
+    }
+}
