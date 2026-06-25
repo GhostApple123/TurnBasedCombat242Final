@@ -1,2 +1,31 @@
-Add  background.wav, attack.wav, block.wav, special.wav, victory.wav, and gameover.wav here.
-The game will still run if these files are missing.
+assets
+│
+├── alpha.png
+├── explorer.png
+├── yoda.png
+│
+├── fighterDog.png
+├── rogueDog.png
+├── tankDog.png
+├── boss.png
+│
+├── background.png
+├── background2.png
+├── background3.png
+├── bossBackground.png
+│
+├── heart.png
+├── shield.png
+├── sword.png
+├── luck.png
+│
+├── background.wav
+├── boss.wav
+├── attack.wav
+├── block.wav
+├── special.wav
+├── levelup.wav
+├── victory.wav
+├── gameover.wav
+├── bossRoar.wav
+└── select.wav

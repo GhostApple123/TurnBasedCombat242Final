@@ -13,7 +13,7 @@ import java.util.Random;
  * Author: Alexander Matthew Hurtak
  * Date Developed: 06/23/2026
  * Last Date Changed: 06/25/2026
- * Rev: 14
+ * Rev: 19
  */
 
 public class TurnBasedCombatGame extends JFrame {
