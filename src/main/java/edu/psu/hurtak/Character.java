@@ -58,14 +58,10 @@ public abstract class Character {
     public abstract String special(Character defender);
 
     protected boolean checkHit(Character defender) {
-        int hitChance = 70 + (dexterity - defender.dexterity) * 5;
+        int hitChance = 85 + (dexterity - defender.dexterity) * 5;
 
         if (hitChance < 20) {
             hitChance = 20;
-        }
-
-        if (hitChance > 95) {
-            hitChance = 95;
         }
 
         return random.nextInt(100) < hitChance;
@@ -88,17 +84,13 @@ public abstract class Character {
     protected int calculateDamage(Character defender, int baseAttack, boolean allowCritical) {
         int damage = baseAttack - defender.defense;
 
-        if (damage < 1) {
-            damage = 1;
-        }
-
         if (defender.blocking) {
             damage = damage * 3 / 4;
             defender.blocking = false;
+        }
 
-            if (damage < 1) {
-                damage = 1;
-            }
+        if (damage < 1) {
+            damage = 1;
         }
 
         if (allowCritical && checkCritical(defender)) {
