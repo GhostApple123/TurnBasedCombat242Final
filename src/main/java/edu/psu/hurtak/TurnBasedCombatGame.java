@@ -319,6 +319,7 @@ public class TurnBasedCombatGame extends JFrame {
         }
 
         String result = "";
+        boolean enemyTurn = true;
 
         if (action == ActionType.ATTACK) {
             result = player.normalAttack(enemy);
@@ -327,9 +328,12 @@ public class TurnBasedCombatGame extends JFrame {
             player.block();
             result = player.getName() + " blocks and prepares for the next attack.";
             soundManager.playSound("/assets/block.wav");
-        } else if (action == ActionType.SPECIAL) {
+        } else if (action == ActionType.SPECIAL && player.specialCooldown == 0) {
             result = player.special(enemy);
             soundManager.playSound("/assets/special.wav");
+        } else {
+            result = player.special(enemy);
+            enemyTurn = false;
         }
 
         gameText.append("\n" + result + "\n");
@@ -339,10 +343,11 @@ public class TurnBasedCombatGame extends JFrame {
             return;
         }
 
-        enemyTurn();
-
-        player.lowerCooldown();
-        enemy.lowerCooldown();
+        if (enemyTurn) {
+            enemyTurn();
+            player.lowerCooldown();
+            enemy.lowerCooldown();
+        }
 
         checkPlayerDefeated();
         updateLabels();
@@ -405,7 +410,7 @@ public class TurnBasedCombatGame extends JFrame {
     }
 
     private void showUpgradeOptions() {
-        String[] options = {"HP +3", "Attack +3", "Defense +3", "Dexterity +3", "Luck +3"};
+        String[] options = {"HP + 3", "Attack + 1", "Defense + 1", "Dexterity + 1", "Luck + 1"};
 
         while (upgradeChoicesLeft > 0) {
             String choice = (String) JOptionPane.showInputDialog(
@@ -419,7 +424,7 @@ public class TurnBasedCombatGame extends JFrame {
             );
 
             if (choice == null) {
-                choice = "HP +3";
+                choice = "HP + 3";
             }
 
             applyUpgrade(choice);
@@ -438,15 +443,15 @@ public class TurnBasedCombatGame extends JFrame {
     }
 
     private void applyUpgrade(String choice) {
-        if (choice.equals("HP +3")) {
+        if (choice.equals("HP + 3")) {
             player.upgradeHP();
-        } else if (choice.equals("Attack +3")) {
+        } else if (choice.equals("Attack + 1")) {
             player.upgradeAttack();
-        } else if (choice.equals("Defense +3")) {
+        } else if (choice.equals("Defense + 1")) {
             player.upgradeDefense();
-        } else if (choice.equals("Dexterity +3")) {
+        } else if (choice.equals("Dexterity + 1")) {
             player.upgradeDexterity();
-        } else if (choice.equals("Luck +3")) {
+        } else if (choice.equals("Luck + 1")) {
             player.upgradeLuck();
         }
 
