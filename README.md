@@ -257,9 +257,9 @@ Possible future improvements include:
 - A high-score screen
 - More story scenes
 
-## Author
+## Author(s)
 
-Alexander Matthew Hurtak
+Alexander Matthew Hurtak, Martin Edwin Naugle, Arbi Xhepa, Avery Paige Timm
 
 ## Course
 

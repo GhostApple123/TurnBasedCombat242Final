@@ -1,5 +1,4 @@
 assets
-│
 ├── alpha.png
 ├── explorer.png
 ├── yoda.png
