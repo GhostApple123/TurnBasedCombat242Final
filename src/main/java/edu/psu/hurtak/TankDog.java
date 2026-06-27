@@ -1,5 +1,7 @@
 package edu.psu.hurtak;
 
+import java.util.Random;
+
 /**
  * Project: TurnBasedCombat242Final
  * Purpose Details: Turn-based cat combat game where Alpha, Explorer, or Yoda fight dog enemies and a three-headed dog boss.
@@ -14,27 +16,40 @@ public class TankDog extends Enemy {
 
     private boolean chargingSpecial;
 
-    public TankDog(int level) {
+    public TankDog(int level, Random rand) {
         super("Tank Dog", 28 + level * 5, 7 + level, 5 + level, 2 + level, 2 + level);
         chargingSpecial = false;
     }
 
     @Override
+    public ActionType chooseAction(Player player) {
+        if ((specialCooldown == 0 && random.nextInt(100) < 40) || chargingSpecial) {
+            return ActionType.SPECIAL;
+        }
+
+        if (currentHP <= maxHP / 4 && random.nextInt(100) < 45) {
+            return ActionType.BLOCK;
+        }
+
+        return ActionType.ATTACK;
+    }
+
+    @Override
     public String special(Character defender) {
         if (specialCooldown > 0) {
-            return name + " tries to use a special, but it is recharging.";
+            return getName() + " tries to use a special, but it is recharging.";
         }
 
         if (!chargingSpecial) {
             chargingSpecial = true;
-            return name + " starts charging Mega Chomp!";
+            return getName() + " starts charging Mega Chomp!";
         }
 
-        int damage = attack * 4;
+        int damage = calculateDamage(defender, attack * 3, false);
         defender.takeDamage(damage);
         chargingSpecial = false;
         specialCooldown = 3;
 
-        return name + " unleashes Mega Chomp for " + damage + " damage!";
+        return getName() + " unleashes Mega Chomp for " + damage + " damage!";
     }
 }

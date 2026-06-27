@@ -1,5 +1,7 @@
 package edu.psu.hurtak;
 
+import java.util.Random;
+
 /**
  * Project: TurnBasedCombat242Final
  * Purpose Details: Turn-based cat combat game where Alpha, Explorer, or Yoda fight dog enemies and a three-headed dog boss.
@@ -16,6 +18,10 @@ public abstract class Enemy extends Character {
         super(name, maxHP, attack, defense, dexterity, luck);
     }
 
+    public Enemy(String name, int maxHP, int attack, int defense, int dexterity, int luck, double hpGR, double attackGR, double defenseGR, double dexterityGR, double luckGR) {
+        super(name, maxHP, attack, defense, dexterity, luck);
+    }
+
     public ActionType chooseAction(Player player) {
         if (currentHP <= maxHP / 4 && random.nextInt(100) < 45) {
             return ActionType.BLOCK;
@@ -26,5 +32,15 @@ public abstract class Enemy extends Character {
         }
 
         return ActionType.ATTACK;
+    }
+
+    public int levelStat(int level, double growthRate) {
+        int statIncrease = 0;
+        for (int i = 0; i < level; i++ ) {
+            if (random.nextInt(100) < growthRate) {
+                statIncrease++;
+            }
+        }
+        return statIncrease;
     }
 }

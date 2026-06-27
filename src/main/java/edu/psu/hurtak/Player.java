@@ -22,14 +22,14 @@ public class Player extends Character {
     @Override
     public String special(Character defender) {
         if (specialCooldown > 0) {
-            return name + "'s special move is still recharging for " + specialCooldown + " turn(s).";
+            return getName() + "'s special move is still recharging for " + specialCooldown + " turn(s).";
         }
 
         int damage = attack * 2;
         defender.takeDamage(damage);
         specialCooldown = 2;
 
-        return name + " uses a powerful cat special move for " + damage + " damage!";
+        return getName() + " uses a powerful cat special move for " + damage + " damage!";
     }
 
     public void upgradeHP() {

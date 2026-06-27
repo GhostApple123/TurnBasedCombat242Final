@@ -1,5 +1,7 @@
 package edu.psu.hurtak;
 
+import java.util.Random;
+
 /**
  * Project: TurnBasedCombat242Final
  * Purpose Details: Turn-based cat combat game where Alpha, Explorer, or Yoda fight dog enemies and a three-headed dog boss.
@@ -12,20 +14,20 @@ package edu.psu.hurtak;
 
 public class RogueDog extends Enemy {
 
-    public RogueDog(int level) {
+    public RogueDog(int level, Random rand) {
         super("Rogue Dog", 14 + level * 2, 5 + level, 1 + level, 9 + level, 5 + level);
     }
 
     @Override
     public String special(Character defender) {
         if (specialCooldown > 0) {
-            return name + " tries to use a special, but it is recharging.";
+            return getName() + " tries to use a special, but it is recharging.";
         }
 
-        int damage = calculateUnblockedDamage(defender, attack + 3, true);
+        int damage = calculateUnblockedDamage(defender, attack + 3, false);
         defender.takeDamage(damage);
         specialCooldown = 2;
 
-        return name + " uses Sneaky Bite and hits through block for " + damage + " damage!";
+        return getName() + " uses Sneaky Bite and hits through block for " + damage + " damage!";
     }
 }

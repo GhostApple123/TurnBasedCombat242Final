@@ -14,7 +14,7 @@ import java.util.Random;
 
 public abstract class Character {
 
-    protected String name;
+    private String name;
     protected int maxHP;
     protected int currentHP;
     protected int attack;
@@ -84,8 +84,8 @@ public abstract class Character {
     protected int calculateDamage(Character defender, int baseAttack, boolean allowCritical) {
         int damage = baseAttack - defender.defense;
 
-        if (defender.blocking) {
-            damage = damage * 3 / 4;
+        if (defender.isBlocking()) {
+            damage = damage / 4;
             defender.blocking = false;
         }
 

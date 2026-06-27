@@ -284,7 +284,7 @@ public class TurnBasedCombatGame extends JFrame {
         gameState = GameState.COMBAT;
 
         if (player.getEnemiesDefeated() >= 6) {
-            enemy = new ThreeHeadedDogBoss(enemyLevel + difficultyBonus);
+            enemy = new ThreeHeadedDogBoss(enemyLevel + difficultyBonus, random);
             gameText.setText("FINAL BATTLE! The Three-Headed Dog Boss appears!\n");
         } else {
             enemy = createRandomEnemy();
@@ -305,11 +305,11 @@ public class TurnBasedCombatGame extends JFrame {
         int choice = random.nextInt(3);
 
         if (choice == 0) {
-            return new FighterDog(adjustedLevel);
+            return new FighterDog(adjustedLevel, random);
         } else if (choice == 1) {
-            return new RogueDog(adjustedLevel);
+            return new RogueDog(adjustedLevel, random);
         } else {
-            return new TankDog(adjustedLevel);
+            return new TankDog(adjustedLevel, random);
         }
     }
 
