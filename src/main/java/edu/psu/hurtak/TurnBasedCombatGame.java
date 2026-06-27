@@ -78,12 +78,12 @@ public class TurnBasedCombatGame extends JFrame {
         enemyLevel = 1;
         difficultyName = "Normal";
         difficultyBonus = 0;
+        soundManager.changeBackgroundMusic("/assets/background.wav");
 
         loadSprites();
         setupScreen();
         showDifficultySelect();
 
-        soundManager.changeBackgroundMusic("/assets/background.wav");
     }
 
     private void loadSprites() {
@@ -225,9 +225,8 @@ public class TurnBasedCombatGame extends JFrame {
         } else {
             difficultyBonus = 0;
         }
-
-        showCharacterSelect();
         soundManager.playSound("/assets/select.wav");
+        showCharacterSelect();
     }
 
     private void showCharacterSelect() {
@@ -260,13 +259,13 @@ public class TurnBasedCombatGame extends JFrame {
 
     private void choosePlayer(String choice) {
         if (choice.equals("Alpha")) {
-            player = new Player("Alpha", 28, 7, 5, 6, 4);
+            player = new Player("Alpha", 35, 7, 7, 7, 7);
             playerSprite = alphaSprite;
         } else if (choice.equals("Explorer")) {
-            player = new Player("Explorer", 25, 6, 4, 9, 5);
+            player = new Player("Explorer", 30, 10, 5, 15, 7);
             playerSprite = explorerSprite;
         } else {
-            player = new Player("Yoda", 34, 6, 7, 4, 4);
+            player = new Player("Yoda", 40, 7, 15, 5, 7);
             playerSprite = yodaSprite;
         }
         soundManager.playSound("/assets/select.wav");
@@ -418,7 +417,7 @@ public class TurnBasedCombatGame extends JFrame {
     }
 
     private void showUpgradeOptions() {
-        String[] options = {"HP + 3", "Attack + 1", "Defense + 1", "Dexterity + 1", "Luck + 1"};
+        String[] options = {"HP + 3", "Attack + 3", "Defense + 3", "Dexterity + 3", "Luck + 3"};
 
         while (upgradeChoicesLeft > 0) {
             String choice = (String) JOptionPane.showInputDialog(
@@ -453,13 +452,13 @@ public class TurnBasedCombatGame extends JFrame {
     private void applyUpgrade(String choice) {
         if (choice.equals("HP + 3")) {
             player.upgradeHP();
-        } else if (choice.equals("Attack + 1")) {
+        } else if (choice.equals("Attack + 3")) {
             player.upgradeAttack();
-        } else if (choice.equals("Defense + 1")) {
+        } else if (choice.equals("Defense + 3")) {
             player.upgradeDefense();
-        } else if (choice.equals("Dexterity + 1")) {
+        } else if (choice.equals("Dexterity + 3")) {
             player.upgradeDexterity();
-        } else if (choice.equals("Luck + 1")) {
+        } else if (choice.equals("Luck + 3")) {
             player.upgradeLuck();
         }
 
