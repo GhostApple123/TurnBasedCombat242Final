@@ -10,7 +10,7 @@ import java.util.Random;
  * Project: TurnBasedCombat242Final
  * Purpose Details: Turn-based cat combat game where Alpha, Explorer, or Yoda fight dog enemies and a three-headed dog boss.
  * Course: IST 242
- * Author(s): Alexander Matthew Hurtak, Martin Edwin Naugle, Arbi Xepha
+ * Author(s): Alexander Matthew Hurtak, Martin Edwin Naugle, Arbi Xepha, Avery Paige Timm
  * Date Developed: 06/23/2026
  * Last Date Changed: 06/25/2026
  * Rev: 19
@@ -83,7 +83,7 @@ public class TurnBasedCombatGame extends JFrame {
         setupScreen();
         showDifficultySelect();
 
-        soundManager.playBackgroundMusic("/assets/background.wav");
+        soundManager.changeBackgroundMusic("/assets/background.wav");
     }
 
     private void loadSprites() {
@@ -212,6 +212,7 @@ public class TurnBasedCombatGame extends JFrame {
         statsLabel.setText("Stats: None yet");
 
         battlePanel.repaint();
+        soundManager.playSound("/assets/select.wav");
     }
 
     private void chooseDifficulty(String choice) {
@@ -226,6 +227,7 @@ public class TurnBasedCombatGame extends JFrame {
         }
 
         showCharacterSelect();
+        soundManager.playSound("/assets/select.wav");
     }
 
     private void showCharacterSelect() {
@@ -267,6 +269,7 @@ public class TurnBasedCombatGame extends JFrame {
             player = new Player("Yoda", 34, 6, 7, 4, 4);
             playerSprite = yodaSprite;
         }
+        soundManager.playSound("/assets/select.wav");
 
         alphaButton.setVisible(false);
         explorerButton.setVisible(false);
@@ -285,7 +288,11 @@ public class TurnBasedCombatGame extends JFrame {
 
         if (player.getEnemiesDefeated() >= 6) {
             enemy = new ThreeHeadedDogBoss(enemyLevel + difficultyBonus, random);
-            gameText.setText("FINAL BATTLE! The Three-Headed Dog Boss appears!\n");
+            soundManager.changeBackgroundMusic("/assets/boss.wav");
+            soundManager.playSound("/assets/bossRoar.wav");
+
+            gameText.setText(
+                    "FINAL BATTLE! The Three-Headed Dog Boss appears!\n");
         } else {
             enemy = createRandomEnemy();
             gameText.setText("A new enemy appears: " + enemy.getName() + "!\n");
@@ -407,6 +414,7 @@ public class TurnBasedCombatGame extends JFrame {
         gameText.append("\nLevel Up! Choose 2 upgrades.\n");
 
         showUpgradeOptions();
+        soundManager.playSound("/assets/levelup.wav");
     }
 
     private void showUpgradeOptions() {

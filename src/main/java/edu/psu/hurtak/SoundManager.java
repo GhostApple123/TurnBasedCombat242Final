@@ -1,99 +1,113 @@
 package edu.psu.hurtak;
 
 import javax.sound.sampled.*;
+import java.io.BufferedInputStream;
 import java.io.InputStream;
 
 /**
  * Project: TurnBasedCombat242Final
- * Purpose Details: Handles background music and sound effects for the turn-based cat combat game.
+ * Purpose Details: Handles background music and sound effects.
  * Course: IST 242
- * Author(s): Alexander Matthew Hurtak, Martin Edwin Naugle, Arbi Xepha
- * Date Developed: 06/23/2026
- * Last Date Changed: 06/25/2026
- * Rev: 5
+ * Author(s): Alexander Matthew Hurtak, Martin Edwin Naugle, Arbi Xepha, Avery Paige Timm
+ * Rev: 6
  */
 
 public class SoundManager {
 
-    /**
-     * Stores the current looping background music.
-     */
     private Clip backgroundClip;
 
     /**
-     * Plays background music on a loop.
-     * If another background song is already playing, it stops it first.
-     *
-     * @param path file path inside the resources/assets folder
+     * Plays looping background music.
      */
     public void playBackgroundMusic(String path) {
+
         try {
+
             stopBackgroundMusic();
 
-            InputStream inputStream = getClass().getResourceAsStream(path);
+            InputStream stream = getClass().getResourceAsStream(path);
 
-            if (inputStream == null) {
-                System.out.println("Background music file not found: " + path);
+            if (stream == null) {
+                System.out.println("Music file not found: " + path);
                 return;
             }
 
-            AudioInputStream audioStream = AudioSystem.getAudioInputStream(inputStream);
+            BufferedInputStream buffered = new BufferedInputStream(stream);
+
+            AudioInputStream audio =
+                    AudioSystem.getAudioInputStream(buffered);
 
             backgroundClip = AudioSystem.getClip();
-            backgroundClip.open(audioStream);
+            backgroundClip.open(audio);
+
             backgroundClip.loop(Clip.LOOP_CONTINUOUSLY);
             backgroundClip.start();
 
         } catch (Exception e) {
-            System.out.println("Background music could not play. Add a WAV file to assets to use music.");
+            e.printStackTrace();
         }
     }
 
     /**
-     * Plays a short sound effect one time.
-     *
-     * @param path file path inside the resources/assets folder
+     * Plays one sound effect.
      */
     public void playSound(String path) {
-        try {
-            InputStream inputStream = getClass().getResourceAsStream(path);
 
-            if (inputStream == null) {
-                System.out.println("Sound effect file not found: " + path);
-                return;
+        new Thread(() -> {
+
+            try {
+
+                InputStream stream = getClass().getResourceAsStream(path);
+
+                if (stream == null) {
+                    System.out.println("Sound file not found: " + path);
+                    return;
+                }
+
+                BufferedInputStream buffered =
+                        new BufferedInputStream(stream);
+
+                AudioInputStream audio =
+                        AudioSystem.getAudioInputStream(buffered);
+
+                Clip clip = AudioSystem.getClip();
+
+                clip.open(audio);
+
+                clip.addLineListener(event -> {
+                    if (event.getType() == LineEvent.Type.STOP) {
+                        clip.close();
+                    }
+                });
+
+                clip.start();
+
+            } catch (Exception e) {
+                e.printStackTrace();
             }
 
-            AudioInputStream audioStream = AudioSystem.getAudioInputStream(inputStream);
-
-            Clip clip = AudioSystem.getClip();
-            clip.open(audioStream);
-            clip.start();
-
-        } catch (Exception e) {
-            System.out.println("Sound effect could not play: " + path);
-        }
+        }).start();
     }
 
     /**
-     * Stops the currently playing background music.
+     * Stops background music.
      */
     public void stopBackgroundMusic() {
-        if (backgroundClip != null) {
-            if (backgroundClip.isRunning()) {
-                backgroundClip.stop();
-            }
 
+        if (backgroundClip != null) {
+
+            backgroundClip.stop();
             backgroundClip.close();
+
             backgroundClip = null;
         }
     }
 
     /**
-     * Changes the background music to a new WAV file.
-     *
-     * @param path new background music path
+     * Switches to another music track.
      */
     public void changeBackgroundMusic(String path) {
+
         stopBackgroundMusic();
         playBackgroundMusic(path);
     }
