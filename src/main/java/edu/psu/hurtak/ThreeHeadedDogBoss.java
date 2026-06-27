@@ -15,7 +15,7 @@ import java.util.Random;
 public class ThreeHeadedDogBoss extends Enemy {
 
     public ThreeHeadedDogBoss(int level, Random rand) {
-        super("Three-Headed Dog Boss", 60 + level * 6, 10 + level, 6 + level, 6 + level, 5 + level);
+        super("Three-Headed Dog Boss", 60 + level * 6, 8 + level, 4 + level, 6 + level, 4 + level);
     }
 
     @Override
