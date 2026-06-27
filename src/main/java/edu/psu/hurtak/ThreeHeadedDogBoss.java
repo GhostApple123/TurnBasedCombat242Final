@@ -4,18 +4,20 @@ import java.util.Random;
 
 /**
  * Project: TurnBasedCombat242Final
- * Purpose Details: Turn-based cat combat game where Alpha, Explorer, or Yoda fight dog enemies and a three-headed dog boss.
+ * Purpose Details: Final boss enemy for the turn-based cat combat game.
  * Course: IST 242
  * Author(s): Alexander Matthew Hurtak, Martin Edwin Naugle, Arbi Xepha, Avery Paige Timm
- * Date Developed: 06/23/2026
- * Last Date Changed: 06/25/2026
- * Rev: 2
+ * Rev: 3
  */
-
 public class ThreeHeadedDogBoss extends Enemy {
 
     public ThreeHeadedDogBoss(int level, Random rand) {
-        super("Three-Headed Dog Boss", 60 + level * 6, 8 + level, 4 + level, 6 + level, 4 + level);
+        super("Three-Headed Dog Boss",
+                45 + level * 5,
+                6 + level,
+                3 + level,
+                5 + level,
+                3 + level);
     }
 
     @Override
@@ -24,7 +26,7 @@ public class ThreeHeadedDogBoss extends Enemy {
             return getName() + " growls while its special recharges.";
         }
 
-        int damage = attack * 3;
+        int damage = calculateDamage(defender, attack * 2, false);
         defender.takeDamage(damage);
         specialCooldown = 3;
 
