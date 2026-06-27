@@ -37,19 +37,19 @@ public class Player extends Character {
     }
 
     public void upgradeAttack() {
-        attack += 3;
+        attack += 2;
     }
 
     public void upgradeDefense() {
-        defense += 3;
+        defense += 2;
     }
 
     public void upgradeDexterity() {
-        dexterity += 3;
+        dexterity += 2;
     }
 
     public void upgradeLuck() {
-        luck += 3;
+        luck += 1;
     }
 
     public void addDefeatedEnemy() {
