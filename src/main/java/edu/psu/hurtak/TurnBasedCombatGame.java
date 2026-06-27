@@ -259,13 +259,13 @@ public class TurnBasedCombatGame extends JFrame {
 
     private void choosePlayer(String choice) {
         if (choice.equals("Alpha")) {
-            player = new Player("Alpha", 40, 10, 8, 9, 8);
+            player = new Player("Alpha", 35, 8, 7, 6, 9);
             playerSprite = alphaSprite;
         } else if (choice.equals("Explorer")) {
-            player = new Player("Explorer", 36, 9, 7, 14, 10);
+            player = new Player("Explorer", 30, 9, 7, 14, 10);
             playerSprite = explorerSprite;
         } else {
-            player = new Player("Yoda", 48, 8, 12, 7, 8);
+            player = new Player("Yoda", 45, 5, 10, 5, 8);
             playerSprite = yodaSprite;
         }
         soundManager.playSound("/assets/select.wav");
