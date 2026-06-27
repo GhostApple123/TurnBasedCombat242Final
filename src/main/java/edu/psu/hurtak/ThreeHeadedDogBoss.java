@@ -13,8 +13,8 @@ public class ThreeHeadedDogBoss extends Enemy {
 
     public ThreeHeadedDogBoss(int level, Random rand) {
         super("Three-Headed Dog Boss",
-                45 + level * 5,
-                6 + level,
+                55 + level * 5,
+                7 + level,
                 3 + level,
                 5 + level,
                 3 + level);
