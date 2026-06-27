@@ -259,13 +259,13 @@ public class TurnBasedCombatGame extends JFrame {
 
     private void choosePlayer(String choice) {
         if (choice.equals("Alpha")) {
-            player = new Player("Alpha", 30, 7, 5, 6, 9);
+            player = new Player("Alpha", 40, 10, 8, 9, 8);
             playerSprite = alphaSprite;
         } else if (choice.equals("Explorer")) {
-            player = new Player("Explorer", 25, 8, 2, 14, 1);
+            player = new Player("Explorer", 36, 9, 7, 14, 10);
             playerSprite = explorerSprite;
         } else {
-            player = new Player("Yoda", 40, 5, 10, 5, 7);
+            player = new Player("Yoda", 48, 8, 12, 7, 8);
             playerSprite = yodaSprite;
         }
         soundManager.playSound("/assets/select.wav");
@@ -452,13 +452,13 @@ public class TurnBasedCombatGame extends JFrame {
     private void applyUpgrade(String choice) {
         if (choice.equals("HP + 3")) {
             player.upgradeHP();
-        } else if (choice.equals("Attack + 2")) {
+        } else if (choice.equals("Attack + 3")) {
             player.upgradeAttack();
-        } else if (choice.equals("Defense + 2")) {
+        } else if (choice.equals("Defense + 3")) {
             player.upgradeDefense();
-        } else if (choice.equals("Dexterity + 2")) {
+        } else if (choice.equals("Dexterity + 3")) {
             player.upgradeDexterity();
-        } else if (choice.equals("Luck + 1")) {
+        } else if (choice.equals("Luck + 3")) {
             player.upgradeLuck();
         }
 
