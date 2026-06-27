@@ -7,7 +7,7 @@ import java.io.InputStream;
  * Project: TurnBasedCombat242Final
  * Purpose Details: Handles background music and sound effects for the turn-based cat combat game.
  * Course: IST 242
- * Author(s): Alexander Matthew Hurtak
+ * Author(s): Alexander Matthew Hurtak, Martin Edwin Naugle, Arbi Xepha
  * Date Developed: 06/23/2026
  * Last Date Changed: 06/25/2026
  * Rev: 5
